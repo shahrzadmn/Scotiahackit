@@ -19,10 +19,34 @@ Template.index.onCreated(function() {
                 position: { lat: value.lat, lng: value.lng },
                 map: map.instance
               });
+              marker.setAnimation(google.maps.Animation.DROP);
 
               let generateInfoWindow = (content) => {
                 let infowindow = new google.maps.InfoWindow({
-                  content: `${content.elevation} | ${content.lat} | ${content.lng} | ${content.price}`
+                  content: `
+                    <div class="ui relaxed divided list">
+                      <div class="item">
+                        <i class="ib large home icon"></i>
+                        <div class="ib">
+                          Home Details
+                        </div>
+                      </div>
+                      <div class="item">
+                        <i class="large dollar middle aligned icon"></i>
+                        <div class="content">
+                          <a class="header">Price</a>
+                          <div class="description">${content.price}</div>
+                        </div>
+                      </div>
+                      <div class="item">
+                        <i class="large world middle aligned icon"></i>
+                        <div class="content">
+                          <a class="header">Lat/Lng</a>
+                          <div class="description">${content.lat} / ${content.lng}</div>
+                        </div>
+                      </div>
+                    </div> 
+                  `
                 });
                 return infowindow;
               }

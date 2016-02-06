@@ -12,10 +12,17 @@ Template.applicationLayout.events({
     AccountsTemplates.logout();
   },
   'click #submitBasicSettings': (event) => {
+
+    let salary = $('#salary').val();
+    let debt = $('#debt').val();
+    let expenses = $('#expenses').val();
+    let monthlyMortgagePaymentCap = Math.floor(((salary / 12) - expenses));
+
     let settings = {
-      salary: $('#salary').val(),
-      debt: $('#debt').val(),
-      expenses: $('#expenses').val()
+      salary,
+      debt,
+      expenses,
+      monthlyMortgagePaymentCap
     }
 
     Meteor.call('saveBasicSettings', settings, Meteor.userId(), function(err, res) {
