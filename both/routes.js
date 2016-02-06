@@ -1,4 +1,5 @@
 Router.route('/', {
 	template: "index",
-	layoutTemplate: "applicationLayout"
+	layoutTemplate: "applicationLayout",
+  loadingTemplate: "loading"
 });
