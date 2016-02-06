@@ -60,6 +60,8 @@ Template.index.onCreated(function() {
 
 Template.index.onRendered(function() {
   GoogleMaps.load();
+  let parentTemplate = this.parentTemplate();
+  configureSliders(Meteor.user(), parentTemplate);
 });
 
 Template.index.helpers({
@@ -73,6 +75,65 @@ Template.index.helpers({
   }
 });
 
-// Template.index.events({
-//   'click '
-// });
+function configureSliders(user, parentTemplate) {
+    // salary
+    let salarySlider = parentTemplate.find($('#salary'));
+    let salaryValue = parentTemplate.find($('#salary--value'));
+
+    //console.log(parentTemplate, salarySlider);
+
+    $(salarySlider).val(user.profile.basicSettings.salary);
+    $(salaryValue).val(user.profile.basicSettings.salary);
+
+    $(salarySlider).on('input change', function(event) {
+      $(salaryValue).val($(salarySlider).val());
+    });
+    $(salaryValue).on('input change', function(event) {
+      $(salarySlider).val($(salaryValue).val());
+    });
+
+    // debt
+    let debtSlider = parentTemplate.find($('#debt'));
+    let debtValue = parentTemplate.find($('#debt--value'));
+
+    $(debtSlider).val(user.profile.basicSettings.debt);
+    $(debtValue).val(user.profile.basicSettings.debt);
+
+    $(debtSlider).on('input change', function(event) {
+      $(debtValue).val($(debtSlider).val());
+    }); 
+
+    $(debtValue).on('input change', function(event) {
+      $(debtSlider).val($(debtValue).val());
+    });
+
+    // expenses
+    let expensesSlider = parentTemplate.find($('#expenses'));
+    let expensesValue = parentTemplate.find($('#expenses--value'));
+
+    $(expensesSlider).val(user.profile.basicSettings.expenses);
+    $(expensesValue).val(user.profile.basicSettings.expenses);
+
+    $(expensesSlider).on('input change', function(event) {
+      $(expensesValue).val($(expensesSlider).val());
+    });
+    $(expensesValue).on('input change', function(event) {
+      $(expensesSlider).val($(expensesValue).val());
+    });
+
+    // amortization
+    let amortizationSlider = parentTemplate.find($('#amortization'));
+    let amortizationValue = parentTemplate.find($('#amortization--value'));
+
+    if (user.profile.advancedSettings) {
+      amortizationSlider.val(user.profile.advancedSettings.amortization);
+      amortizationValue.val(user.profile.advancedSettings.amortization);
+
+      amortizationSlider.on('input change', function(event) {
+        amortizationValue.val(amortizationSlider.val());
+      });
+      amortizationValue.on('input change', function(event) {
+        amortizationSlider.val(amortizationValue.val());
+      }); 
+    }
+  }

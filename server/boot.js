@@ -67,10 +67,15 @@ Meteor.startup(function() {
   }
 })
 
-// get fb profile pic
+// get fb profile pic + set annual salary, debt, expenses
 
 Accounts.onCreateUser(function(options, user) {
   options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+  options.profile.basicSettings = {
+    salary: 55000,
+    debt: 2000,
+    expenses: 800
+  }
   user.profile = options.profile;
   return user;    
 });

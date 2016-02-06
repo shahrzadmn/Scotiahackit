@@ -25,10 +25,19 @@
     }
     h4 {
       color: yellow;
+      span {
+        font-size: 0.8em;
+        color: green;
+        float: right;
+      }
     }
     input {
       display: block;
       margin: 0 auto;
+    }
+    .rate--value {
+      float: right;
+      color: green;
     }
   }
 }

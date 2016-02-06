@@ -2,7 +2,6 @@ Template.applicationLayout.onRendered(function() {
   $('.ui.sidebar').sidebar();
   $('.ui.dropdown').dropdown();
   $('.ui.accordion').accordion();
-  configureSliders(Meteor.user());
 });
 
 Template.applicationLayout.events({
@@ -94,57 +93,6 @@ Template.applicationLayout.helpers({
   }
 })
 
-
-function configureSliders(user) {
-  // salary
-  let salarySlider = $('#salary');
-  let salaryValue = $('#salary--value');
-
-  salarySlider.on('input change', function(event) {
-    salaryValue.val(salarySlider.val());
-  }); 
-
-  salarySlider.val(user.profile.basicSettings.salary);
-  salaryValue.val(user.profile.basicSettings.salary);
-
-  // debt
-  let debtSlider = $('#debt');
-  let debtValue = $('#debt--value');
-
-  debtSlider.on('input change', function(event) {
-    debtValue.val(debtSlider.val());
-  }); 
-
-  debtSlider.val(user.profile.basicSettings.debt);
-  debtValue.val(user.profile.basicSettings.debt);
-
-  // expenses
-  let expensesSlider = $('#expenses');
-  let expensesValue = $('#expenses--value');
-
-  expensesSlider.on('input change', function(event) {
-    expensesValue.val(expensesSlider.val());
-  });
-
-  expensesSlider.val(user.profile.basicSettings.expenses);
-  expensesValue.val(user.profile.basicSettings.expenses);
-
-  // amortization
-  let amortizationSlider = $('#amortization');
-  let amortizationValue = $('#amortization--value');
-
-  amortizationSlider.on('input change', function(event) {
-    amortizationValue.html(amortizationSlider.val() + " years");
-  });
-
-  // common event handler for all sliders
-  // $(document).on('input change', [salarySlider, debtSlider, expensesSlider], function(event) {
-  //   let salary = salarySlider.val();
-  //   let debt = debtSlider.val();
-  //   let expenses = expensesSlider.val();
-  //   console.log(salary, debt, expenses);
-  // });
-}
 
 toastr.options = {
   "closeButton": false,
