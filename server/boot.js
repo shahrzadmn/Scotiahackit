@@ -73,6 +73,7 @@ Accounts.onCreateUser(function(options, user) {
   options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
   options.profile.basicSettings = {
     salary: 55000,
+    savings: 9000,
     debt: 2000,
     expenses: 800
   }

@@ -14,12 +14,14 @@ Template.applicationLayout.events({
   'click #submitBasicSettings': (event) => {
 
     let salary = $('#salary').val();
+    let savings = $('#savings').val();
     let debt = $('#debt').val();
     let expenses = $('#expenses').val();
     let monthlyMortgagePaymentCap = Math.floor(((salary / 12) - expenses));
 
     let settings = {
       salary,
+      savings,
       debt,
       expenses,
       monthlyMortgagePaymentCap

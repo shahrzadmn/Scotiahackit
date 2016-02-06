@@ -119,8 +119,6 @@ function configureSliders(user, parentTemplate) {
     let salarySlider = parentTemplate.find($('#salary'));
     let salaryValue = parentTemplate.find($('#salary--value'));
 
-    //console.log(parentTemplate, salarySlider);
-
     $(salarySlider).val(user.profile.basicSettings.salary);
     $(salaryValue).val(user.profile.basicSettings.salary);
 
@@ -129,6 +127,20 @@ function configureSliders(user, parentTemplate) {
     });
     $(salaryValue).on('input change', function(event) {
       $(salarySlider).val($(salaryValue).val());
+    });
+
+    // savings
+    let savingsSlider = parentTemplate.find($('#savings'));
+    let savingsValue = parentTemplate.find($('#savings--value'));
+
+    $(savingsSlider).val(user.profile.basicSettings.savings);
+    $(savingsValue).val(user.profile.basicSettings.savings);
+
+    $(savingsSlider).on('input change', function(event) {
+      $(savingsValue).val($(savingsSlider).val());
+    });
+    $(savingsValue).on('input change', function(event) {
+      $(savingsSlider).val($(savingsValue).val());
     });
 
     // debt
