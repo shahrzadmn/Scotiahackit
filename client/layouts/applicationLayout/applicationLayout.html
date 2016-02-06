@@ -47,7 +47,7 @@
               id="expenses" 
               type="range"
               min="0"                   
-              max="50000"               
+              max="10000"               
               step="10"                
               value="0"
             >
@@ -75,13 +75,17 @@
                   Fixed Rate Mortgage
                 </div>
                 {{#each fixedRateMortgage}}
-                  <div class="item">{{key}} <span class="rate--value">{{value}}%</span></div>
+                  <div class="item">
+                    {{key}} <span class="rate--value">{{value}}%</span>
+                  </div>
                 {{/each}}
                 <div disabled class="disabled item">
                   Variable Rate Mortgage
                 </div>
                 {{#each variableRateMortgage}}
-                  <div class="item">{{key}} <span class="rate--value">{{value}}%</span></div>
+                  <div class="item">
+                    {{key}} <span class="rate--value">{{value}}%</span>
+                  </div>
                 {{/each}}
               </div>
             </div>

@@ -7,7 +7,20 @@ Template.index.onCreated(function() {
           let marker = new google.maps.Marker({
             position: { lat: value.lat, lng: value.lng },
             map: map.instance
-          })
+          });
+
+          let infowindow = new google.maps.InfoWindow({
+            content: "test"
+          });
+
+          marker.addListener('mouseover', function() {
+            infowindow.open(map.instance, marker)
+          });
+
+          marker.addListener('mouseout', function() {
+            infowindow.close(map.instance, marker)
+          });
+
         })
       }
     });
@@ -28,3 +41,7 @@ Template.index.helpers({
     }
   }
 });
+
+// Template.index.events({
+//   'click '
+// });
