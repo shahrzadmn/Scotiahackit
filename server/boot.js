@@ -12,10 +12,10 @@ Meteor.startup(function() {
   if (Homes.find().count() == 0) {
     console.log('no homes');
     
-    _.each(_.range(5), function(element, index) {
+    _.each(_.range(250), function(element, index) {
 
-      let randomLat = Number(44 + "." + (_.random(0, 999999)));
-      let randomLng = Number(-78 + "." + (_.random(0, 999999)));
+      let randomLat = Number(43 + "." + (_.random(0, 999999)));
+      let randomLng = Number(-80 + "." + (_.random(0, 999999)));
 
       //console.log(element, randomLat, randomLng);
 

@@ -13,12 +13,15 @@ Template.index.onCreated(function() {
     // });
     Meteor.call('getHomes', function(err, res) {
       if (!err) {
-        console.log(res);
-      } else {
-        console.log(err);
+        $.each(res, function(index, value) {
+          // console.log(index, value.lat, value.lng);
+          let marker = new google.maps.Marker({
+            position: { lat: value.lat, lng: value.lng },
+            map: map.instance
+          })
+        })
       }
     });
-
   });
 });
 
@@ -30,8 +33,8 @@ Template.index.helpers({
   mapOptions: function() {
     if (GoogleMaps.loaded()) {
       return {
-        center: new google.maps.LatLng(43.652663, -79.381825),
-        zoom: 8
+        center: new google.maps.LatLng(43.652663, -80.381825),
+        zoom: 10
       }
     }
   }
