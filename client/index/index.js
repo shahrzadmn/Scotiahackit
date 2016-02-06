@@ -14,7 +14,7 @@ Template.index.onCreated(function() {
           }, function(results, status) {
             let checkWater = results[0].elevation;
 
-            if (checkWater > 0) {
+            if (checkWater > 67) {
               let marker = new google.maps.Marker({
                 position: { lat: value.lat, lng: value.lng },
                 map: map.instance
@@ -22,7 +22,7 @@ Template.index.onCreated(function() {
 
               let generateInfoWindow = (content) => {
                 let infowindow = new google.maps.InfoWindow({
-                  content: content
+                  content: `${content.elevation} | ${content.lat} | ${content.lng}`
                 });
                 return infowindow;
               }
@@ -34,7 +34,11 @@ Template.index.onCreated(function() {
                 elevator.getElevationForLocations({
                   "locations": [new google.maps.LatLng(lat, long)]
                 }, function(results, status) {
-                  let info = generateInfoWindow((results[0].elevation).toString());
+                  let info = generateInfoWindow({
+                    elevation: (results[0].elevation).toString(),
+                    lat: lat,
+                    lng: long
+                  });
                   stashInfo.push(info);
                   info.open(map.instance, marker);
                 })
@@ -61,8 +65,8 @@ Template.index.helpers({
   mapOptions: function() {
     if (GoogleMaps.loaded()) {
       return {
-        center: new google.maps.LatLng(43.652663, -80.381825),
-        zoom: 8
+        center: new google.maps.LatLng(43.652663, -79.381825),
+        zoom: 10
       }
     }
   }
