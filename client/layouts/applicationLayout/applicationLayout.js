@@ -5,8 +5,7 @@ Template.applicationLayout.onRendered(function() {
   let salaryValue = $('#salary--value');
 
   salarySlider.on('input change', function(event) {
-    //console.log(salarySlider.val());
-    salaryValue.html(salarySlider.val())
+    salaryValue.html("$" + salarySlider.val());
   });
 
 });

@@ -9,9 +9,7 @@ Meteor.startup(function() {
     secret: Meteor.settings.facebook.secret
   });
 
-  if (Homes.find().count() == 0) {
-    console.log('no homes');
-    
+  if (Homes.find().count() == 0) {    
     _.each(_.range(250), function(element, index) {
 
       let randomLat = Number(43 + "." + (_.random(0, 999999)));
