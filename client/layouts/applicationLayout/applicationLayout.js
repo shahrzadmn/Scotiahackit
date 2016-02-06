@@ -5,5 +5,8 @@ Template.applicationLayout.onRendered(function() {
 Template.applicationLayout.events({
   'click #menu--button': (event) => {
     $('.ui.sidebar').sidebar('toggle');
+  },
+  'click [role="logout"]': (event) => {
+    AccountsTemplates.logout();
   }
 })

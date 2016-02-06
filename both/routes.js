@@ -1,5 +1,6 @@
 Router.route('/', {
 	template: "index",
+  name: "index",
 	layoutTemplate: "applicationLayout",
   loadingTemplate: "loading"
 });
@@ -15,9 +16,7 @@ Router.onBeforeAction(function() {
     // if the user is not logged in, render the Login template
     Router.go('login');
   } else {
-    // otherwise don't hold up the rest of hooks or our route/action function
-    // from running
-    this.next();
+    Router.go('index');
   }
   this.next();
 });
