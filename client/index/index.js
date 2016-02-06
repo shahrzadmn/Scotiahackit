@@ -125,15 +125,14 @@ function configureSliders(user, parentTemplate) {
     let amortizationSlider = parentTemplate.find($('#amortization'));
     let amortizationValue = parentTemplate.find($('#amortization--value'));
 
-    if (user.profile.advancedSettings) {
-      amortizationSlider.val(user.profile.advancedSettings.amortization);
-      amortizationValue.val(user.profile.advancedSettings.amortization);
+    $(amortizationSlider).val(user.profile.advancedSettings.amortization || 25);
+    $(amortizationValue).val(user.profile.advancedSettings.amortization || 25);
 
-      amortizationSlider.on('input change', function(event) {
-        amortizationValue.val(amortizationSlider.val());
-      });
-      amortizationValue.on('input change', function(event) {
-        amortizationSlider.val(amortizationValue.val());
-      }); 
-    }
+    $(amortizationSlider).on('input change', function(event) {
+      $(amortizationValue).val($(amortizationSlider).val());
+    });
+    $(amortizationValue).on('input change', function(event) {
+      $(amortizationSlider).val($(amortizationValue).val());
+    }); 
+    
   }
