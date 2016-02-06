@@ -1,3 +1,5 @@
+// init fb
+
 Meteor.startup(function() {
   ServiceConfiguration.configurations.remove({
     service: "facebook"
@@ -8,6 +10,8 @@ Meteor.startup(function() {
     appId: Meteor.settings.facebook.appId,
     secret: Meteor.settings.facebook.secret
   });
+
+  // seed data
 
   if (Homes.find().count() == 0) {    
     _.each(_.range(250), function(element, index) {
@@ -23,5 +27,12 @@ Meteor.startup(function() {
       });
     });
   }
-
 })
+
+// get fb profile pic
+
+Accounts.onCreateUser(function(options, user) {
+  options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+  user.profile = options.profile;
+  return user;    
+});
