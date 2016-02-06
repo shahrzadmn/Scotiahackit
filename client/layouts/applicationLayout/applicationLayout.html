@@ -11,16 +11,67 @@
       <i role="logout" class="remove icon"></i>
     </div>
     <div class="item">
-      <h3>Salary <span>$</span></h3>
+      <h3>Annual Salary <!-- <span>$</span> --></h3>
       <input
         id="salary" 
         type="range"
-        min="10"                   
-        max="1000"               
+        min="0"                   
+        max="500000"               
         step="10"                
         value="0"
       >
       <span id="salary--value" class="range--value">$0</span>
+    </div>
+    <div class="item">
+      <h3>Total Debt <!-- <span>$</span> --></h3>
+      <input
+        id="debt" 
+        type="range"
+        min="0"                   
+        max="500000"               
+        step="10"                
+        value="0"
+      >
+      <span id="debt--value" class="range--value">$0</span>
+    </div>
+    <div class="item">
+      <h3>Monthly Expenses <!-- <span>$</span> --></h3>
+      <input
+        id="expenses" 
+        type="range"
+        min="0"                   
+        max="500000"               
+        step="10"                
+        value="0"
+      >
+      <span id="expenses--value" class="range--value">$0</span>
+    </div>
+    <div class="item">
+      <h3>Amortization</h3>
+      <input
+        id="amortization" 
+        type="range"
+        min="0"                   
+        max="30"               
+        step="1"                
+        value="25"
+      >
+      <span id="amortization--value" class="range--value">25 years</span>
+    </div>
+    <div class="item">
+      <div class="ui dropdown">
+        <input type="hidden" name="gender">
+        <i class="dropdown icon"></i>
+        <div class="default text">Interest Rate</div>
+        <div class="menu">
+          {{#each fixedRateMortgage}}
+            <div class="item" data-value="male">{{key}} {{value}}</div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <h4>Are you planning to buy a car?</h4>  
     </div>
   </div>
   <div class="pusher">

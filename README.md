@@ -8,3 +8,5 @@
     - do so while comparing best options against each other
 
   - submit! =)
+
+- we can assume that we have access to customer data
