@@ -11,6 +11,14 @@ Template.index.onCreated(function() {
     //   position: { lat: 43.688732,  lng: -79.409166 },
     //   map: map.instance
     // });
+    Meteor.call('getHomes', function(err, res) {
+      if (!err) {
+        console.log(res);
+      } else {
+        console.log(err);
+      }
+    });
+
   });
 });
 

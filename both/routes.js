@@ -2,13 +2,14 @@ Router.route('/', {
 	template: "index",
   name: "index",
 	layoutTemplate: "applicationLayout",
-  loadingTemplate: "loading",
-  waitOn: () => {
-    return Meteor.subscribe('homes')
-  },
-  data: () => {
-    return Homes.find({})
-  }
+  loadingTemplate: "loading"
+  // ,
+  // waitOn: () => {
+  //   return Meteor.subscribe('homes')
+  // },
+  // data: () => {
+  //   return Homes.find({})
+  // }
 });
 
 Router.route('/login', {
