@@ -9,3 +9,21 @@
   left: 0;
   display: none;
 }
+
+[role="logout"] {
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}
+
+.ui.sidebar {
+  .item {
+    img {
+      margin: 0 auto;
+    }
+    .range--value {
+      float: right;
+    }
+  }
+}

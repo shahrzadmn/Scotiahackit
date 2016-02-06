@@ -1,5 +1,14 @@
 Template.applicationLayout.onRendered(function() {
   $('.ui.sidebar').sidebar();
+  
+  let salarySlider = $('#salary');
+  let salaryValue = $('#salary--value');
+
+  salarySlider.on('input change', function(event) {
+    //console.log(salarySlider.val());
+    salaryValue.html(salarySlider.val())
+  });
+
 });
 
 Template.applicationLayout.events({
@@ -10,3 +19,4 @@ Template.applicationLayout.events({
     AccountsTemplates.logout();
   }
 })
+
