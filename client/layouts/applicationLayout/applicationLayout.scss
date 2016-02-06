@@ -25,6 +25,22 @@
     }
     .range--value {
       float: right;
+      // cursor: pointer;
     }
   }
+}
+
+.white {
+  color: white !important;
+}
+
+.white.text {
+  span {
+    padding: 0 1em;
+  }
+}
+
+.rate--value {
+  float: right;
+  color: green;
 }
