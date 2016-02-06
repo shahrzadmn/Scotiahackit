@@ -23,9 +23,12 @@
     img {
       margin: 0 auto;
     }
-    .range--value {
-      float: right;
-      // cursor: pointer;
+    h4 {
+      color: yellow;
+    }
+    input {
+      display: block;
+      margin: 0 auto;
     }
   }
 }
@@ -40,7 +43,7 @@
   }
 }
 
-.rate--value {
-  float: right;
-  color: green;
+.ui.input {
+  padding: 2em 2em 1em 2em;
 }
+

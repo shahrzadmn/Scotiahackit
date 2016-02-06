@@ -13,11 +13,11 @@
     </div>
     <div class="item">
       <div class="ui accordion">
-        <div class="title">
+        <div class="active title">
           <i class="white dropdown icon"></i>
           <p style="display: inline-block;" class="white">Basic Settings</p>
         </div>
-        <div class="content">
+        <div class="active content">
           <div class="item">
             <h4>Annual Salary <!-- <span>$</span> --></h4>
             <input
@@ -28,7 +28,9 @@
               step="1000"                
               value="0"
             >
-            <span id="salary--value" class="range--value">$0</span>
+            <div class="ui input">
+              <input type="number" id="salary--value" class="range--value" value="0">
+            </div>
           </div>
           <div class="item">
             <h4>Total Debt <!-- <span>$</span> --></h4>
@@ -40,7 +42,9 @@
               step="100"                
               value="0"
             >
-            <span id="debt--value" class="range--value">$0</span>
+            <div class="ui input">
+              <input type="number" id="debt--value" class="range--value" value="0">
+            </div>
           </div>
           <div class="item">
             <h4>Monthly Expenses <!-- <span>$</span> --></h4>
@@ -52,7 +56,15 @@
               step="10"                
               value="0"
             >
-            <span id="expenses--value" class="range--value">$0</span>
+            <div class="ui input">
+              <input type="number" id="expenses--value" class="range--value" value="0">
+            </div>
+          </div>
+          <div class="item">
+            <div id="submitBasicSettings" class="ui labeled icon inverted blue button">
+              <i class="plus icon"></i>
+              Save Basic Settings
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +92,7 @@
             <div class="ui dropdown">
               <input type="hidden" name="interest-rate">
               <i class="dropdown icon"></i>
-              <div class="default white text">Interest Rate</div>
+              <div id="interest-rate" class="default white text">Interest Rate</div>
               <div class="menu">
                 <div disabled class="disabled item">
                   Fixed Rate Mortgage
@@ -101,6 +113,12 @@
               </div>
             </div>
           </div>          
+          <div class="item">
+            <div id="submitAdvancedSettings" class="ui labeled icon inverted green button">
+              <i class="plus icon"></i>
+              Save Advanced Settings
+            </div>
+          </div>
         </div>
       </div>
     </div>
