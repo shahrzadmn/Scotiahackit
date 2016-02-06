@@ -72,9 +72,24 @@ Template.index.onCreated(function() {
               marker.addListener('mouseout', function() {
                 let info = stashInfo.shift();
                 info.close(map.instance, marker);
-              });  
-            }
+              });
 
+              marker.addListener('click', function() {
+              $('#modal').html(`<div class="ui small modal">
+                  <div class="header">
+                    <i class="blue huge home icon"></i>
+                    Home Details
+                  </div>
+                  <div class="description">
+                    <div class="home--description">
+                       <div class="home--details">For Sale Price: <span>${accounting.formatMoney(value.price)}</span></div> 
+                       <div class="home--details">5% Down Payment: <span>${accounting.formatMoney(value.price * 0.05)}</span></div>
+                    </div>
+                  </div>
+                </div>`);
+                $('.small.modal').modal('show'); 
+              });
+            }
           })
         })
       }

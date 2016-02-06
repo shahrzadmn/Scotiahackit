@@ -10,3 +10,17 @@
 div.ib {
   line-height: 2;
 }
+
+
+.home--description {
+  padding: 2em;
+  .home--details {
+    display: block;
+    font-size: 1.25em;
+    span {
+      color: green;
+      font-size: 1.5em;
+      padding: 1.2em;
+    }
+  }
+}
