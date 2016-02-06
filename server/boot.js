@@ -14,12 +14,29 @@ Meteor.startup(function() {
   // seed data
 
   if (Homes.find().count() == 0) {    
-    _.each(_.range(250), function(element, index) {
-
+    _.each(_.range(100), function(element, index) {
       let randomLat = Number(43 + "." + (_.random(0, 999999)));
       let randomLng = Number(-80 + "." + (_.random(0, 999999)));
 
-      //console.log(element, randomLat, randomLng);
+      Homes.insert({
+        lat: randomLat,
+        lng: randomLng
+      });
+    });
+
+    _.each(_.range(100), function(element, index) {
+      let randomLat = Number(44 + "." + (_.random(0, 999999)));
+      let randomLng = Number(-79 + "." + (_.random(0, 999999)));
+
+      Homes.insert({
+        lat: randomLat,
+        lng: randomLng
+      });
+    });
+
+    _.each(_.range(50), function(element, index) {
+      let randomLat = Number(43 + "." + (_.random(0, 999999)));
+      let randomLng = Number(-79 + "." + (_.random(0, 999999)));
 
       Homes.insert({
         lat: randomLat,

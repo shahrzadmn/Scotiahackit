@@ -9,16 +9,34 @@ Template.index.onCreated(function() {
             map: map.instance
           });
 
-          let infowindow = new google.maps.InfoWindow({
-            content: "test"
-          });
+          let generateInfoWindow = (content) => {
+            let infowindow = new google.maps.InfoWindow({
+              content: content
+            });
+            return infowindow;
+          }
+          
+          stashInfo = [];
 
-          marker.addListener('mouseover', function() {
-            infowindow.open(map.instance, marker)
+          marker.addListener('mouseover', function(event) {
+            let info = generateInfoWindow("test");
+            stashInfo.push(info);
+            info.open(map.instance, marker);
+
+            let lat = marker.internalPosition.lat();
+            let long = marker.internalPosition.lng();
+           
+            let elevator = new google.maps.ElevationService;
+            elevator.getElevationForLocations({
+              "locations": [new google.maps.LatLng(lat, long)]
+            }, function(results, status) {
+              console.log(results[0].elevation, status);
+            })
           });
 
           marker.addListener('mouseout', function() {
-            infowindow.close(map.instance, marker)
+            let info = stashInfo.shift();
+            info.close(map.instance, marker);
           });
 
         })
@@ -36,7 +54,7 @@ Template.index.helpers({
     if (GoogleMaps.loaded()) {
       return {
         center: new google.maps.LatLng(43.652663, -80.381825),
-        zoom: 10
+        zoom: 8
       }
     }
   }
