@@ -25,4 +25,7 @@ dburles:google-maps
 sacha:spin
 service-configuration
 msavin:mongol
-digilord:faker
+meteorhacks:npm
+
+
+npm-container

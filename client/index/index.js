@@ -22,7 +22,7 @@ Template.index.onCreated(function() {
 
               let generateInfoWindow = (content) => {
                 let infowindow = new google.maps.InfoWindow({
-                  content: `${content.elevation} | ${content.lat} | ${content.lng}`
+                  content: `${content.elevation} | ${content.lat} | ${content.lng} | ${content.price}`
                 });
                 return infowindow;
               }
@@ -37,7 +37,8 @@ Template.index.onCreated(function() {
                   let info = generateInfoWindow({
                     elevation: (results[0].elevation).toString(),
                     lat: lat,
-                    lng: long
+                    lng: long,
+                    price: value.price
                   });
                   stashInfo.push(info);
                   info.open(map.instance, marker);
