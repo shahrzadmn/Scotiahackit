@@ -27,7 +27,15 @@ Template.applicationLayout.events({
   'click #submitAdvancedSettings': (event) => {
     let settings = {
       amortization: $('#amortization').val(),
-      interestRate: $('#interest-rate').text()
+      interestTerm: $('#interest-rate')
+        .clone()
+        .children()
+        .remove()
+        .end()
+        .text(),
+      interestRate: $('#interest-rate')
+        .find('span') 
+        .text()
     }
 
     Meteor.call('saveAdvancedSettings', settings, Meteor.userId(), function(err, res) {

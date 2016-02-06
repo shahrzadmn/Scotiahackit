@@ -125,14 +125,26 @@ function configureSliders(user, parentTemplate) {
     let amortizationSlider = parentTemplate.find($('#amortization'));
     let amortizationValue = parentTemplate.find($('#amortization--value'));
 
-    $(amortizationSlider).val(user.profile.advancedSettings.amortization || 25);
-    $(amortizationValue).val(user.profile.advancedSettings.amortization || 25);
+    if (user.profile.advancedSettings) {
+      $(amortizationSlider).val(user.profile.advancedSettings.amortization);
+      $(amortizationValue).val(user.profile.advancedSettings.amortization);
+    } else {
+      $(amortizationSlider).val(25);
+      $(amortizationValue).val(25);  
+    }
 
     $(amortizationSlider).on('input change', function(event) {
       $(amortizationValue).val($(amortizationSlider).val());
     });
     $(amortizationValue).on('input change', function(event) {
       $(amortizationSlider).val($(amortizationValue).val());
-    }); 
+    });
+
+    // interest rate 
+    let interestRateDropdown = parentTemplate.find($('#interest-rate'));
     
+    if (user.profile.advancedSettings && user.profile.advancedSettings.interestRate) {
+      let advanced = user.profile.advancedSettings;
+      $(interestRateDropdown).html(`${advanced.interestTerm} <span class="rate--value">${advanced.interestRate}</span>`);
+    }
   }
