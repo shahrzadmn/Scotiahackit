@@ -2,6 +2,24 @@ Template.applicationLayout.onRendered(function() {
   $('.ui.sidebar').sidebar();
   $('.ui.dropdown').dropdown();
   $('.ui.accordion').accordion();
+
+  $('#submitExistingProperty').on('click', function(event) {
+    let existing = {
+      address: $('#existing--address').val(),
+      propertyTax: $('#existing--property-tax').val(),
+      utilties: $('#existing--utilities').val(),
+      condoFees: $('#existing--condo-fees').val(),
+      remainingMortagePrincipal: $('#existing--mortgage-principal').val(),
+      contractType: $('#contract-type').next().find('.text').text(),
+      currentInterestRate: $('#existing--interest-rate').val()
+    }
+    Meteor.call('submitExistingProperty', existing, Meteor.userId(), function(err, res) {
+      if (!err) {
+        $('#existingPropertyModal').modal('hide');
+        toastr["success"]("Saved your existing property!");
+      }
+    })
+  });
 });
 
 Template.applicationLayout.events({
@@ -52,6 +70,9 @@ Template.applicationLayout.events({
         toastr["success"]("Saved your advanced settings!")
       }
     })
+  },
+  'click #addExistingPropertyButton': (event) => {
+    $('#existingPropertyModal').modal('show');
   }
 })
 

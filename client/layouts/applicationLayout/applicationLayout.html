@@ -12,10 +12,13 @@
       <i role="logout" class="remove icon"></i>
     </div>
     <div class="item">
+      <div id="addExistingPropertyButton" class="ui yellow inverted button">Add Existing Property</div>
+    </div>
+    <div class="item">
       <div class="ui accordion">
         <div class="title">
           <i class="white dropdown icon"></i>
-          <p style="display: inline-block;" class="white">Basic Settings</p>
+          <p style="display: inline-block;" class="white">Personal Financial Details</p>
         </div>
         <div class="content">
           <div class="item">
@@ -77,13 +80,13 @@
           <div class="item">
             <div id="submitBasicSettings" class="ui labeled icon inverted blue button">
               <i class="plus icon"></i>
-              Save Basic Settings
+              Save Personal Financial Details
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="item">
+    {{!-- <div class="item">
       <div class="ui accordion">
         <div class="title">
           <i class="white dropdown icon"></i>
@@ -140,7 +143,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
   <div class="pusher">
     <div class="ui grid">
@@ -153,6 +156,67 @@
     <div id="menu--button" class="ui icon green button">
       <i class="settings icon"></i>
       Sidebar
+    </div>
+  </div>
+  <div id="existingPropertyModal" class="ui small modal">
+    <div class="header">
+      <i class="yellow huge home icon"></i>
+      Add Existing Property
+    </div>
+    <div class="home--description">
+      <div class="ui form">
+        <div class="field">
+          <label>Address</label>
+          <input id="existing--address" type="text" placeholder="123 Main St.">
+        </div>
+        <div class="three fields">
+          <div class="field">
+            <label>Property Tax</label>
+            <input id="existing--property-tax" type="number" placeholder="2000">
+          </div>
+          <div class="field">
+            <label>Utilities</label>
+            <input id="existing--utilities" type="number" placeholder="100">
+          </div>
+          <div class="field">
+            <label>Condominum Fees (if applicable)</label>
+            <input id="existing--condo-fees" type="number" placeholder="0">
+          </div>
+        </div>
+        <div class="three fields">
+          <div class="field">
+            <label>Remaining Mortgage Principal</label>
+            <input id="existing--mortgage-principal" type="number" placeholder="120000">
+          </div>
+          <div class="field">
+            <label id="contract-type">Contract Type</label>
+            <select class="ui dropdown">
+              <option id="existing--frequency" value="">Frequency</option>
+              <option value="1">6 Month Closed</option>
+              <option value="2">6 Month Open</option>
+              <option value="3">1 Year Open</option>
+              <option value="4">1 Year Closed</option>
+              <option value="5">2 Year Closed</option>
+              <option value="6">3 Year Closed</option>
+              <option value="7">4 Year Closed</option>
+              <option value="8">5 Year Closed</option>
+              <option value="9">7 Year Closed</option>
+              <option value="10">10 Year Closed</option>
+              <option value="11">5 Year VRM</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Interest Rate</label>
+            <input id="existing--interest-rate" type="number" placeholder="2.2%">
+          </div>
+        </div>
+        <div class="field">
+          <div id="submitExistingProperty" class="ui huge yellow labeled icon button">
+            <i class="check icon"></i>
+            Submit
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

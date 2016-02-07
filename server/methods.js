@@ -17,5 +17,13 @@ Meteor.methods({
       }
     });
     return true;
+  },
+  'submitExistingProperty': function(existing, userId) {
+    Meteor.users.update(userId, {
+      $set: {
+        "profile.existingProperty": existing
+      }
+    });
+    return true;
   }
 });
