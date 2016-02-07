@@ -218,11 +218,14 @@ Template.index.helpers({
   }
 });
 
-// Template.index.events({
-//   'click #updateExistingProperty': function(e) {
-//     console.log('it got cliekd');
-//   }
-// })
+var expenses = function() {
+    let exps = Meteor.user().profile.expenses;
+    let expenses = 0;
+    _.each(exps, function(value, key) {
+      expenses += Number(value);
+    });
+    return expenses;
+  }
 
 function configureSliders(user, parentTemplate) {
     // salary
@@ -272,8 +275,10 @@ function configureSliders(user, parentTemplate) {
     let expensesSlider = parentTemplate.find($('#expenses'));
     let expensesValue = parentTemplate.find($('#expenses--value'));
 
-    $(expensesSlider).val(user.profile.basicSettings.expenses);
-    $(expensesValue).val(user.profile.basicSettings.expenses);
+    console.log('ex', expenses());
+
+    $(expensesSlider).val(expenses());
+    $(expensesValue).val(expenses());
 
     $(expensesSlider).on('input change', function(event) {
       $(expensesValue).val($(expensesSlider).val());
