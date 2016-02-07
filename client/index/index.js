@@ -183,15 +183,16 @@ Template.index.onCreated(function() {
                 info.close(map.instance, marker);
               });
 
-              let savings = Meteor.user().profile.basicSettings.savings;
-              let sufficientFunds;
-              if (savings > value.price) {
-                sufficientFunds = "You have sufficient savings to apply for this mortgage";
-              } else {
-                sufficientFunds = "You need a bit more before you can make a downpayment";
-              }
-
               marker.addListener('click', function() {
+                let savings = Meteor.user().profile.basicSettings.savings;
+                let monthlyFreeCashFlow = Meteor.user().profile.basicSettings.monthlyMortgagePaymentCap;
+
+
+              // if (savings < downPayment) {
+              //   var months = 0;
+              //   console.log(downPayment - savings);
+              // }
+
               $('#modal').html(`<div id="modal-dynamic" class="ui small modal">
                   <div class="header">
                     <i class="red huge home icon"></i>
@@ -201,9 +202,14 @@ Template.index.onCreated(function() {
                     <div class="home--description">
                       <div class="home--details">For Sale Price: <span>${accounting.formatMoney(value.price)}</span></div>
                       <div class="home--details">5% Down Payment: <span>${accounting.formatMoney(value.price * 0.05)}</span></div>
+                      <br>
                       <hr>
+                      <br>
                       <div class="home--details">Your savings: <span>${accounting.formatMoney(savings)}</span></div>
-                      <div class="home--details smaller">${sufficientFunds}</div>
+                      <div class="home--details">Your monthly free cash flow: <span>${accounting.formatMoney(monthlyFreeCashFlow)}</span></div>
+                      <br>
+                      <br>
+                      <div style="display: block; width: 50%; margin: 0 auto;" class="ui red button">Apply for a Mortgage</div>
                     </div>
                   </div>
                 </div>`);
