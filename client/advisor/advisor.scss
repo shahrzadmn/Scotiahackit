@@ -27,3 +27,11 @@ h1 {
     }
   }
 }
+rect {
+  //highcharts-background
+  fill: #EEE
+}
+
+text[text-anchor="end"] {
+  display: none;
+}
