@@ -183,6 +183,14 @@ Template.index.onCreated(function() {
                 info.close(map.instance, marker);
               });
 
+              let savings = Meteor.user().profile.basicSettings.savings;
+              let sufficientFunds;
+              if (savings > value.price) {
+                sufficientFunds = "You have sufficient savings to apply for this mortgage";
+              } else {
+                sufficientFunds = "You need a bit more before you can make a downpayment";
+              }
+
               marker.addListener('click', function() {
               $('#modal').html(`<div id="modal-dynamic" class="ui small modal">
                   <div class="header">
@@ -191,8 +199,11 @@ Template.index.onCreated(function() {
                   </div>
                   <div class="description">
                     <div class="home--description">
-                       <div class="home--details">For Sale Price: <span>${accounting.formatMoney(value.price)}</span></div>
-                       <div class="home--details">5% Down Payment: <span>${accounting.formatMoney(value.price * 0.05)}</span></div>
+                      <div class="home--details">For Sale Price: <span>${accounting.formatMoney(value.price)}</span></div>
+                      <div class="home--details">5% Down Payment: <span>${accounting.formatMoney(value.price * 0.05)}</span></div>
+                      <hr>
+                      <div class="home--details">Your savings: <span>${accounting.formatMoney(savings)}</span></div>
+                      <div class="home--details smaller">${sufficientFunds}</div>
                     </div>
                   </div>
                 </div>`);
@@ -211,9 +222,9 @@ Template.index.onRendered(function() {
   let parentTemplate = this.parentTemplate();
   configureSliders(Meteor.user(), parentTemplate);
 
-  $('#updateExistingProperty').click(function() {
-    console.log('halp');
-  })
+  // $('#updateExistingProperty').click(function() {
+  //   console.log('halp');
+  // });
 });
 
 Template.index.helpers({
@@ -223,6 +234,13 @@ Template.index.helpers({
         center: new google.maps.LatLng(43.652663, -79.381825),
         zoom: 10
       }
+    }
+  },
+  "savingsExceedsDownPayment": (downPayment) => {
+    if (Meteor.user.basicSettings.savings > downPayment) {
+      return true;
+    } else {
+      return false;
     }
   }
 });
@@ -262,16 +280,20 @@ function configureSliders(user, parentTemplate) {
 
     $(salarySlider).val(user.profile.basicSettings.salary);
     $(salaryValue).val(user.profile.basicSettings.salary);
-    mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+    mortgageAmount = Number(4*$('#salary')
+        .val())+Number($('#savings')
+        .val())-Number($('#debt')
+        .val())-(10*Number($('#expenses')
+        .val()));
 
     $(salarySlider).on('input change', function(event) {
       $(salaryValue).val($(salarySlider).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
     $(salaryValue).on('input change', function(event) {
       $(salarySlider).val($(salaryValue).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
 
@@ -284,12 +306,12 @@ function configureSliders(user, parentTemplate) {
 
     $(savingsSlider).on('input change', function(event) {
       $(savingsValue).val($(savingsSlider).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
     $(savingsValue).on('input change', function(event) {
       $(savingsSlider).val($(savingsValue).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
 
@@ -302,13 +324,13 @@ function configureSliders(user, parentTemplate) {
 
     $(debtSlider).on('input change', function(event) {
       $(debtValue).val($(debtSlider).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
 
     $(debtValue).on('input change', function(event) {
       $(debtSlider).val($(debtValue).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
 
@@ -316,19 +338,17 @@ function configureSliders(user, parentTemplate) {
     let expensesSlider = parentTemplate.find($('#expenses'));
     let expensesValue = parentTemplate.find($('#expenses--value'));
 
-    console.log('ex', expenses());
-
     $(expensesSlider).val(expenses());
     $(expensesValue).val(expenses());
 
     $(expensesSlider).on('input change', function(event) {
       $(expensesValue).val($(expensesSlider).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
     $(expensesValue).on('input change', function(event) {
       $(expensesSlider).val($(expensesValue).val());
-      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      mortgageAmount=Number(4*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
       whatitis();
     });
 

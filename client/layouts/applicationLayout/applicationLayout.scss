@@ -63,7 +63,14 @@
 }
 
 .button--mini__centered {
-  margin: 0 auto !important;
-  display: block !important;
-  width: 50% !important;
+  // margin: 0 auto !important;
+  // display: inline-block !important;
+  // width: 49% !important;
+  // height: 3em;
+  // padding: 1em;
+}
+
+.ui.small.buttons {
+  display: block;
+  text-align: center;
 }
