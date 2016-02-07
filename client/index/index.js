@@ -185,7 +185,7 @@ Template.index.onCreated(function() {
 
               marker.addListener('click', function() {
                 let savings = Meteor.user().profile.basicSettings.savings;
-                let monthlyFreeCashFlow = Meteor.user().profile.basicSettings.monthlyFreeCashFlow;
+                let monthlyFreeCashFlow = Meteor.user().profile.basicSettings.monthlyMortgagePaymentCap;
 
 
               // if (savings < downPayment) {
