@@ -7,9 +7,9 @@ Template.applicationLayout.onRendered(function() {
     let existing = {
       address: $('#existing--address').val(),
       propertyTax: $('#existing--property-tax').val(),
-      utilties: $('#existing--utilities').val(),
+      utilities: $('#existing--utilities').val(),
       condoFees: $('#existing--condo-fees').val(),
-      remainingMortagePrincipal: $('#existing--mortgage-principal').val(),
+      remainingMortgagePrincipal: $('#existing--mortgage-principal').val(),
       contractType: $('#contract-type').next().find('.text').text(),
       currentInterestRate: $('#existing--interest-rate').val()
     }

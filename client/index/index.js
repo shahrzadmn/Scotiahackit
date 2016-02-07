@@ -3,8 +3,9 @@ Template.index.onCreated(function() {
   GoogleMaps.ready('map', function(map) {
 
     if (Meteor.user() && Meteor.user().profile.existingProperty) {
+      let existingProperty = Meteor.user().profile.existingProperty;
       let geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ "address": Meteor.user().profile.existingProperty.address }, function(results, status) {
+      geocoder.geocode({ "address": existingProperty.address }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           let latitude = results[0].geometry.location.lat();
           let longitude = results[0].geometry.location.lng();
@@ -16,18 +17,68 @@ Template.index.onCreated(function() {
           marker.setAnimation(google.maps.Animation.DROP);
 
           marker.addListener('click', function(event) {
-            $('#modal').html(`<div id="modal-dynamic" class="ui small modal">
+            $('#modal').html(`<div id="updateExistingPropertyModal" class="ui small modal">
               <div class="header">
                 <i class="blue huge home icon"></i>
-                Home Details
+                Update Existing Property & Financials
               </div>
-              <div class="description">
-                <div class="home--description">
-                   <div class="home--details">detail: <span>span</span></div> 
+              <div class="home--description">
+                <div class="ui form">
+                  <div class="field">
+                    <label>Address</label>
+                    <input value="${existingProperty.address}" id="existing--address" type="text" placeholder="123 Main St.">
+                  </div>
+                  <div class="three fields">
+                    <div class="field">
+                      <label>Property Tax</label>
+                      <input value="${existingProperty.propertyTax}" id="existing--property-tax" type="number" placeholder="2000">
+                    </div>
+                    <div class="field">
+                      <label>Utilities</label>
+                      <input value="${existingProperty.utilities}" id="existing--utilities" type="number" placeholder="100">
+                    </div>
+                    <div class="field">
+                      <label>Condominum Fees (if applicable)</label>
+                      <input value="${existingProperty.condoFees}" id="existing--condo-fees" type="number" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="three fields">
+                    <div class="field">
+                      <label>Remaining Mortgage Principal</label>
+                      <input value="${existingProperty.remainingMortgagePrincipal}" id="existing--mortgage-principal" type="number" placeholder="120000">
+                    </div>
+                    <div class="field">
+                      <label id="contract-type">Contract Type</label>
+                      <select class="ui dropdown">
+                        <option id="existing--frequency"></option>
+                        <option value="1">6 Month Closed</option>
+                        <option value="2">6 Month Open</option>
+                        <option value="3">1 Year Open</option>
+                        <option value="4">1 Year Closed</option>
+                        <option value="5">2 Year Closed</option>
+                        <option value="6">3 Year Closed</option>
+                        <option value="7">4 Year Closed</option>
+                        <option value="8">5 Year Closed</option>
+                        <option value="9">7 Year Closed</option>
+                        <option value="10">10 Year Closed</option>
+                        <option value="11">5 Year VRM</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label>Interest Rate</label>
+                      <input value="${existingProperty.currentInterestRate}" id="existing--interest-rate" type="number" placeholder="2.2%">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div id="submitExistingProperty" class="ui huge blue labeled icon button">
+                      <i class="check icon"></i>
+                      Submit
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>`);
-            $('#modal-dynamic').modal('show');             
+            $('#updateExistingPropertyModal').modal('show');             
           });
         }
       });
@@ -115,6 +166,10 @@ Template.index.helpers({
     }
   }
 });
+
+Template.index.events({
+  //'click ': function() {}
+})
 
 function configureSliders(user, parentTemplate) {
     // salary
