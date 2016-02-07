@@ -29,6 +29,7 @@ Template.applicationLayout.onRendered(function() {
                 map: GoogleMaps.maps.map.instance,
                 icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
               });
+              marker.setAnimation(google.maps.Animation.DROP);
             }
           });
         });

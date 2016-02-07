@@ -1,6 +1,23 @@
 Template.index.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
   GoogleMaps.ready('map', function(map) {
+
+    if (Meteor.user() && Meteor.user().profile.existingProperty) {
+      let geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ "address": Meteor.user().profile.existingProperty.address }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          let latitude = results[0].geometry.location.lat();
+          let longitude = results[0].geometry.location.lng();
+          let marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: GoogleMaps.maps.map.instance,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+          });
+          marker.setAnimation(google.maps.Animation.DROP);
+        }
+      });
+    }
+
     Meteor.call('getHomes', function(err, res) {
       if (!err) {
 
