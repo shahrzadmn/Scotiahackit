@@ -98,7 +98,7 @@ function regen(user) {
             "value" : (user.profile.expenses.health).toString()
           },
           { 
-            "label": "fitness",
+            "label": "Fitness",
             "value" : (user.profile.expenses.fitness).toString()
           },
           { 
