@@ -1,6 +1,12 @@
+var themap;
+var markers = [];
+var values = [];
+
 Template.index.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
   GoogleMaps.ready('map', function(map) {
+
+    themap = GoogleMaps.maps.map.instance;
 
     if (Meteor.user() && Meteor.user().profile.existingProperty) {
       let existingProperty = Meteor.user().profile.existingProperty;
@@ -151,10 +157,13 @@ Template.index.onCreated(function() {
               });
               marker.setAnimation(google.maps.Animation.DROP);
 
+              markers.push(marker);
+              values.push(value.price);
+
               marker.addListener('mouseover', function(event) {
                 let lat = marker.internalPosition.lat();
                 let long = marker.internalPosition.lng();
-                
+
                 elevator.getElevationForLocations({
                   "locations": [new google.maps.LatLng(lat, long)]
                 }, function(results, status) {
@@ -182,12 +191,12 @@ Template.index.onCreated(function() {
                   </div>
                   <div class="description">
                     <div class="home--description">
-                       <div class="home--details">For Sale Price: <span>${accounting.formatMoney(value.price)}</span></div> 
+                       <div class="home--details">For Sale Price: <span>${accounting.formatMoney(value.price)}</span></div>
                        <div class="home--details">5% Down Payment: <span>${accounting.formatMoney(value.price * 0.05)}</span></div>
                     </div>
                   </div>
                 </div>`);
-                $('#modal-dynamic').modal('show'); 
+                $('#modal-dynamic').modal('show');
               });
             }
           })
@@ -218,6 +227,25 @@ Template.index.helpers({
   }
 });
 
+var mortgageAmount;
+// Sets the map on all markers in the array.
+function setMapOnAll() {
+  //alert(mortgageAmount);
+  for (var i = 0; i < markers.length; i++) {
+    if(values[i]>=mortgageAmount) {
+      markers[i].setMap(null);
+    }
+    else {markers[i].setMap(themap);}
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+whatitis = function clearMarkers() {
+  //alert(mortgageAmount);
+  setMapOnAll();
+}
+
+
 var expenses = function() {
   let exps = Meteor.user().profile.expenses;
   let expenses = 0;
@@ -234,12 +262,17 @@ function configureSliders(user, parentTemplate) {
 
     $(salarySlider).val(user.profile.basicSettings.salary);
     $(salaryValue).val(user.profile.basicSettings.salary);
+    mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
 
     $(salarySlider).on('input change', function(event) {
       $(salaryValue).val($(salarySlider).val());
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
     });
     $(salaryValue).on('input change', function(event) {
       $(salarySlider).val($(salaryValue).val());
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
     });
 
     // savings
@@ -251,9 +284,13 @@ function configureSliders(user, parentTemplate) {
 
     $(savingsSlider).on('input change', function(event) {
       $(savingsValue).val($(savingsSlider).val());
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
     });
     $(savingsValue).on('input change', function(event) {
       $(savingsSlider).val($(savingsValue).val());
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
     });
 
     // debt
@@ -265,10 +302,14 @@ function configureSliders(user, parentTemplate) {
 
     $(debtSlider).on('input change', function(event) {
       $(debtValue).val($(debtSlider).val());
-    }); 
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
+    });
 
     $(debtValue).on('input change', function(event) {
       $(debtSlider).val($(debtValue).val());
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
     });
 
     // expenses
@@ -282,9 +323,13 @@ function configureSliders(user, parentTemplate) {
 
     $(expensesSlider).on('input change', function(event) {
       $(expensesValue).val($(expensesSlider).val());
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
     });
     $(expensesValue).on('input change', function(event) {
       $(expensesSlider).val($(expensesValue).val());
+      mortgageAmount=Number(2*$('#salary').val())+Number($('#savings').val())-Number($('#debt').val())-(10*Number($('#expenses').val()));
+      whatitis();
     });
 
     // amortization
@@ -296,7 +341,7 @@ function configureSliders(user, parentTemplate) {
       $(amortizationValue).val(user.profile.advancedSettings.amortization);
     } else {
       $(amortizationSlider).val(25);
-      $(amortizationValue).val(25);  
+      $(amortizationValue).val(25);
     }
 
     $(amortizationSlider).on('input change', function(event) {
@@ -306,9 +351,9 @@ function configureSliders(user, parentTemplate) {
       $(amortizationSlider).val($(amortizationValue).val());
     });
 
-    // interest rate 
+    // interest rate
     let interestRateDropdown = parentTemplate.find($('#interest-rate'));
-    
+
     if (user.profile.advancedSettings && user.profile.advancedSettings.interestRate) {
       let advanced = user.profile.advancedSettings;
       $(interestRateDropdown).html(`${advanced.interestTerm} <span class="rate--value">${advanced.interestRate}</span>`);
@@ -339,7 +384,7 @@ function configureSliders(user, parentTemplate) {
               <div class="description">${content.lat} / ${content.lng}</div>
             </div>
           </div>
-        </div> 
+        </div>
       `
     });
     return infowindow;
