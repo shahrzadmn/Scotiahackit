@@ -219,13 +219,13 @@ Template.index.helpers({
 });
 
 var expenses = function() {
-    let exps = Meteor.user().profile.expenses;
-    let expenses = 0;
-    _.each(exps, function(value, key) {
-      expenses += Number(value);
-    });
-    return expenses;
-  }
+  let exps = Meteor.user().profile.expenses;
+  let expenses = 0;
+  _.each(exps, function(value, key) {
+    expenses += Number(value);
+  });
+  return expenses;
+}
 
 function configureSliders(user, parentTemplate) {
     // salary
