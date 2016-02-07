@@ -7,7 +7,7 @@ Template.advisor.helpers({
     let exps = Meteor.user().profile.expenses;
     let expenses = 0;
     _.each(exps, function(value, key) {
-      expenses += value;
+      expenses += Number(value);
     });
     return expenses;
   },
