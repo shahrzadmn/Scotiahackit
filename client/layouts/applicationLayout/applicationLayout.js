@@ -46,7 +46,6 @@ Template.applicationLayout.events({
     AccountsTemplates.logout();
   },
   'click #submitBasicSettings': (event) => {
-
     let salary = $('#salary').val();
     let savings = $('#savings').val();
     let debt = $('#debt').val();

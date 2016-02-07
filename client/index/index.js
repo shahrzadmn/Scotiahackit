@@ -14,6 +14,21 @@ Template.index.onCreated(function() {
             icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
           });
           marker.setAnimation(google.maps.Animation.DROP);
+
+          marker.addListener('click', function(event) {
+            $('#modal').html(`<div id="modal-dynamic" class="ui small modal">
+              <div class="header">
+                <i class="blue huge home icon"></i>
+                Home Details
+              </div>
+              <div class="description">
+                <div class="home--description">
+                   <div class="home--details">detail: <span>span</span></div> 
+                </div>
+              </div>
+            </div>`);
+            $('#modal-dynamic').modal('show');             
+          });
         }
       });
     }
@@ -37,36 +52,6 @@ Template.index.onCreated(function() {
                 map: map.instance
               });
               marker.setAnimation(google.maps.Animation.DROP);
-
-              let generateInfoWindow = (content) => {
-                let infowindow = new google.maps.InfoWindow({
-                  content: `
-                    <div class="ui relaxed divided list">
-                      <div class="item">
-                        <i class="ib large home icon"></i>
-                        <div class="ib">
-                          Home Details
-                        </div>
-                      </div>
-                      <div class="item">
-                        <i class="large dollar middle aligned icon"></i>
-                        <div class="content">
-                          <a class="header">Price</a>
-                          <div class="description">${content.price}</div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <i class="large world middle aligned icon"></i>
-                        <div class="content">
-                          <a class="header">Lat/Lng</a>
-                          <div class="description">${content.lat} / ${content.lng}</div>
-                        </div>
-                      </div>
-                    </div> 
-                  `
-                });
-                return infowindow;
-              }
 
               marker.addListener('mouseover', function(event) {
                 let lat = marker.internalPosition.lat();
@@ -92,9 +77,9 @@ Template.index.onCreated(function() {
               });
 
               marker.addListener('click', function() {
-              $('#modal').html(`<div class="ui small modal">
+              $('#modal').html(`<div id="modal-dynamic" class="ui small modal">
                   <div class="header">
-                    <i class="blue huge home icon"></i>
+                    <i class="red huge home icon"></i>
                     Home Details
                   </div>
                   <div class="description">
@@ -104,7 +89,7 @@ Template.index.onCreated(function() {
                     </div>
                   </div>
                 </div>`);
-                $('.small.modal').modal('show'); 
+                $('#modal-dynamic').modal('show'); 
               });
             }
           })
@@ -215,4 +200,34 @@ function configureSliders(user, parentTemplate) {
       let advanced = user.profile.advancedSettings;
       $(interestRateDropdown).html(`${advanced.interestTerm} <span class="rate--value">${advanced.interestRate}</span>`);
     }
+  }
+
+  let generateInfoWindow = (content) => {
+    let infowindow = new google.maps.InfoWindow({
+      content: `
+        <div class="ui relaxed divided list">
+          <div class="item">
+            <i class="ib large home icon"></i>
+            <div class="ib">
+              Home Details
+            </div>
+          </div>
+          <div class="item">
+            <i class="large dollar middle aligned icon"></i>
+            <div class="content">
+              <a class="header">Price</a>
+              <div class="description">${content.price}</div>
+            </div>
+          </div>
+          <div class="item">
+            <i class="large world middle aligned icon"></i>
+            <div class="content">
+              <a class="header">Lat/Lng</a>
+              <div class="description">${content.lat} / ${content.lng}</div>
+            </div>
+          </div>
+        </div> 
+      `
+    });
+    return infowindow;
   }
