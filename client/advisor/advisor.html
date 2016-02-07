@@ -3,7 +3,13 @@
     <div class="row">
       <div class="one wide column">&nbsp;</div>
       <div class="fourteen wide column">
-        <h1>Expenses Management</h1>
+        <h1>
+          Expenses Management
+          <p>
+            Total monthly expenses: 
+            <span class="money"> ${{totalExpenses}}</span>
+          </p>
+        </h1>
         <div id="advisor--list" class="ui relaxed divided list">
           <a class="item">
             <div class="ui accordion">
@@ -12,7 +18,7 @@
                 Food & Dining
               </div>
               <div class="ui input content">
-                <input type="number" id="food-and-dining" placeholder="500">
+                <input type="number" id="foodAndDining" value={{expenses.foodAndDining}} placeholder="500">
               </div>
             </div>
           </a>
@@ -23,7 +29,7 @@
                 Bills & Utilities
               </div>
               <div class="ui input content">
-                <input type="number" id="bills-and-utilities" placeholder="500">
+                <input type="number" id="billsAndUtilities" value={{expenses.billsAndUtilities}} placeholder="500">
               </div>
             </div>
           </a>
@@ -34,7 +40,7 @@
                 Auto & Transportation
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="autoAndTransportation" value={{expenses.autoAndTransportation}} placeholder="500">
               </div>
             </div>
           </a>
@@ -45,7 +51,7 @@
                 Business & Services
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="businessAndServices" value={{expenses.businessAndServices}} placeholder="500">
               </div>
             </div>
           </a>
@@ -56,7 +62,7 @@
                 Education
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="education" value={{expenses.education}} placeholder="500">
               </div>
             </div>
           </a>
@@ -67,7 +73,7 @@
                 Entertainment
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="entertainment" value={{expenses.entertainment}} placeholder="500">
               </div>
             </div>
           </a>
@@ -78,7 +84,7 @@
                 Fees & Charges
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="feesAndCharges" value={{expenses.feesAndCharges}} placeholder="500">
               </div>
             </div>
           </a>
@@ -89,7 +95,7 @@
                 Gifts & Donations
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="giftsAndDonations" value={{expenses.giftsAndDonations}} placeholder="500">
               </div>
             </div>
           </a>
@@ -100,7 +106,7 @@
                 Health
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="health" value={{expenses.health}} placeholder="500">
               </div>
             </div>
           </a>
@@ -111,7 +117,7 @@
                 Fitness
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="fitness" value={{expenses.fitness}} placeholder="500">
               </div>
             </div>
           </a>
@@ -122,29 +128,7 @@
                 Household
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
-              </div>
-            </div>
-          </a>
-          <a class="item">
-            <div class="ui accordion">
-              <div class="title">
-                <i class="dropdown icon"></i>
-                Income
-              </div>
-              <div class="ui input content">
-                <input type="number" id="" placeholder="500">
-              </div>
-            </div>
-          </a>
-          <a class="item">
-            <div class="ui accordion">
-              <div class="title">
-                <i class="dropdown icon"></i>
-                Investments
-              </div>
-              <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="household" value={{expenses.household}} placeholder="500">
               </div>
             </div>
           </a>
@@ -155,7 +139,7 @@
                 Kids
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="kids" value={{expenses.kids}} placeholder="500">
               </div>
             </div>
           </a>
@@ -166,7 +150,7 @@
                 Loans
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="loans" value={{expenses.loans}} placeholder="500">
               </div>
             </div>
           </a>
@@ -177,7 +161,7 @@
                 Misc. Expenses
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="miscExpenses" value={{expenses.miscExpenses}} placeholder="500">
               </div>
             </div>
           </a>
@@ -188,18 +172,7 @@
                 Personal Care
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
-              </div>
-            </div>
-          </a>
-          <a class="item">
-            <div class="ui accordion">
-              <div class="title">
-                <i class="dropdown icon"></i>
-                Personal Care
-              </div>
-              <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="personalCare" value={{expenses.personalCare}} placeholder="500">
               </div>
             </div>
           </a>
@@ -210,7 +183,7 @@
                 Pets
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="pets" value={{expenses.pets}} placeholder="500">
               </div>
             </div>
           </a>
@@ -221,7 +194,7 @@
                 Shopping
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="shopping" value={{expenses.shopping}} placeholder="500">
               </div>
             </div>
           </a>
@@ -232,7 +205,7 @@
                 Taxes
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="taxes" value={{expenses.taxes}} placeholder="500">
               </div>
             </div>
           </a>
@@ -243,7 +216,7 @@
                 Travel
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="travel" value={{expenses.travel}} placeholder="500">
               </div>
             </div>
           </a>
@@ -254,7 +227,7 @@
                 Moving  
               </div>
               <div class="ui input content">
-                <input type="number" id="" placeholder="500">
+                <input type="number" id="moving" value={{expenses.moving}} placeholder="500">
               </div>
             </div>
           </a>

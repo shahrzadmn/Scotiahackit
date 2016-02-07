@@ -71,11 +71,31 @@ Meteor.startup(function() {
 
 Accounts.onCreateUser(function(options, user) {
   options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
-  options.profile.basicSettings = {
-    salary: 55000,
-    savings: 9000,
-    debt: 2000,
-    expenses: 800
+  options.profile.expenses = {
+    // salary: 55000,
+    // savings: 9000,
+    // debt: 2000,
+    // expenses: 800
+    foodAndDining: 100,
+    billsAndUtilities: 100,
+    autoAndTransportation: 120,
+    businessAndServices: 0,
+    education: 0,
+    entertainment: 200,
+    feesAndCharges: 40,
+    giftsAndDonations: 0,
+    health: 0,
+    fitness: 100,
+    household: 200,
+    kids: 0,
+    loans: 0,
+    miscExpenses: 0,
+    pets: 0,
+    shopping: 200,
+    taxes: 0,
+    moving: 0,
+    travel: 0,
+    personalCare: 0 
   }
   user.profile = options.profile;
   return user;    

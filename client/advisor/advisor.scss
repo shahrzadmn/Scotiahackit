@@ -17,3 +17,13 @@
     }
   }
 }
+
+h1 {
+  p {
+    display: block;
+    font-size: 0.7em;
+    .money {
+      color: green;
+    }
+  }
+}

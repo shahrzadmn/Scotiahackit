@@ -32,5 +32,14 @@ Meteor.methods({
         "profile.existingProperty": existing
       }
     });
+  },
+  'updateExpense': (value, id, userId) => {
+    let key = `profile.expenses.${id}`;
+    let update = {
+      $set: {}
+    }
+    update.$set[key] = value;
+    
+    return Meteor.users.update(userId, update);
   }
 });
