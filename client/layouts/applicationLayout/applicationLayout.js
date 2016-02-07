@@ -11,7 +11,9 @@ Template.applicationLayout.onRendered(function() {
       condoFees: $('#existing--condo-fees').val(),
       remainingMortgagePrincipal: $('#existing--mortgage-principal').val(),
       contractType: $('#contract-type').next().find('.text').text(),
-      currentInterestRate: $('#existing--interest-rate').val()
+      currentInterestRate: $('#existing--interest-rate').val(),
+      monthlyPayment: $('#existing--monthly-payment').val(),
+      remainingYears: $('#existing--remaining').val()
     }
     Meteor.call('submitExistingProperty', existing, Meteor.userId(), function(err, res) {
       if (!err) {
@@ -34,7 +36,7 @@ Template.applicationLayout.onRendered(function() {
           });
         });
       }
-    })
+    });
   });
 });
 

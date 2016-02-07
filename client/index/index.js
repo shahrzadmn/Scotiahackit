@@ -26,59 +26,106 @@ Template.index.onCreated(function() {
                 <div class="ui form">
                   <div class="field">
                     <label>Address</label>
-                    <input value="${existingProperty.address}" id="existing--address" type="text" placeholder="123 Main St.">
+                    <input value="${existingProperty.address}" id="update--address" type="text" placeholder="123 Main St.">
+                  </div>
+                  <div class="two fields">
+                    <div class="field">
+                      <label>Monthly Payment</label>
+                      <input value="${existingProperty.monthlyPayment}" id="update--monthly-payment" type="number" placeholder="1500">
+                    </div>
+                    <div class="field">
+                      <label>Remaining Mortgage Years</label>
+                      <input value="${existingProperty.remainingYears}" id="update--remaining" type="number" placeholder="10">
+                    </div>
                   </div>
                   <div class="three fields">
                     <div class="field">
                       <label>Property Tax</label>
-                      <input value="${existingProperty.propertyTax}" id="existing--property-tax" type="number" placeholder="2000">
+                      <input value="${existingProperty.propertyTax}" id="update--property-tax" type="number" placeholder="2000">
                     </div>
                     <div class="field">
                       <label>Utilities</label>
-                      <input value="${existingProperty.utilities}" id="existing--utilities" type="number" placeholder="100">
+                      <input value="${existingProperty.utilities}" id="update--utilities" type="number" placeholder="100">
                     </div>
                     <div class="field">
                       <label>Condominum Fees (if applicable)</label>
-                      <input value="${existingProperty.condoFees}" id="existing--condo-fees" type="number" placeholder="0">
+                      <input value="${existingProperty.condoFees}" id="update--condo-fees" type="number" placeholder="0">
                     </div>
                   </div>
                   <div class="three fields">
                     <div class="field">
                       <label>Remaining Mortgage Principal</label>
-                      <input value="${existingProperty.remainingMortgagePrincipal}" id="existing--mortgage-principal" type="number" placeholder="120000">
+                      <input value="${existingProperty.remainingMortgagePrincipal}" id="update--mortgage-principal" type="number" placeholder="120000">
                     </div>
                     <div class="field">
-                      <label id="contract-type">Contract Type</label>
-                      <select class="ui dropdown">
-                        <option id="existing--frequency"></option>
-                        <option value="1">6 Month Closed</option>
-                        <option value="2">6 Month Open</option>
-                        <option value="3">1 Year Open</option>
-                        <option value="4">1 Year Closed</option>
-                        <option value="5">2 Year Closed</option>
-                        <option value="6">3 Year Closed</option>
-                        <option value="7">4 Year Closed</option>
-                        <option value="8">5 Year Closed</option>
-                        <option value="9">7 Year Closed</option>
-                        <option value="10">10 Year Closed</option>
-                        <option value="11">5 Year VRM</option>
+                      <label>Contract Type</label>
+                      <select id="update--contract-type" class="ui dropdown">
+                        <option id="update--frequency"></option>
+                        <option value="6 Month Closed">6 Month Closed</option>
+                        <option value="6 Month Open">6 Month Open</option>
+                        <option value="1 Year Open">1 Year Open</option>
+                        <option value="1 Year Closed">1 Year Closed</option>
+                        <option value="2 Year Closed">2 Year Closed</option>
+                        <option value="3 Year Closed">3 Year Closed</option>
+                        <option value="4 Year Closed">4 Year Closed</option>
+                        <option value="5 Year Closed">5 Year Closed</option>
+                        <option value="7 Year Closed">7 Year Closed</option>
+                        <option value="10 Year Closed">10 Year Closed</option>
+                        <option value="5 Year VRM">5 Year VRM</option>
                       </select>
                     </div>
                     <div class="field">
                       <label>Interest Rate</label>
-                      <input value="${existingProperty.currentInterestRate}" id="existing--interest-rate" type="number" placeholder="2.2%">
+                      <input value="${existingProperty.currentInterestRate}" id="update--interest-rate" type="number" placeholder="2.2%">
                     </div>
                   </div>
                   <div class="field">
-                    <div id="submitExistingProperty" class="ui huge blue labeled icon button">
-                      <i class="check icon"></i>
-                      Submit
+                    <div class="actions">
+                      <div class="ui approve button">Update</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>`);
-            $('#updateExistingPropertyModal').modal('show');             
+            $('#updateExistingPropertyModal').modal('show');
+            $('#updateExistingPropertyModal').modal('setting', {
+                'onApprove': function() {
+                  var existing = {
+                    address: $('#update--address').val(),
+                    propertyTax: $('#update--property-tax').val(),
+                    utilities: $('#update--utilities').val(),
+                    condoFees: $('#update--condo-fees').val(),
+                    remainingMortgagePrincipal: $('#update--mortgage-principal').val(),
+                    contractType: $('#update--contract-type').val(),
+                    currentInterestRate: $('#update--interest-rate').val(),
+                    monthlyPayment: $('#update--monthly-payment').val(),
+                    remainingYears: $('#update--remaining').val()
+                  }
+                  console.log(existing);
+                  Meteor.call('updateExistingProperty', existing, Meteor.userId(), function(err, res) {
+                    if (!err) {
+                      console.log(res);
+                      toastr["info"]("Updated your existing property & financials!");
+                    }
+                  })
+                }
+              });
+            // let existing = {
+            //   address: $('#existing--address').val(),
+            //   propertyTax: $('#existing--property-tax').val(),
+            //   utilities: $('#existing--utilities').val(),
+            //   condoFees: $('#existing--condo-fees').val(),
+            //   remainingMortgagePrincipal: $('#existing--mortgage-principal').val(),
+            //   contractType: $('#contract-type').next().find('.text').text(),
+            //   currentInterestRate: $('#existing--interest-rate').val(),
+            //   monthlyPayment: $('#existing--monthly-payment').val(),
+            //   remainingYears: $('#existing--remaining').val()
+            // }
+            // Meteor.call('updateExistingProperty', existing, function(err, res) {
+            //   if (!err) {
+            //     toastr["info"]("Updated your existing property & financials!");
+            //   }
+            // })
           });
         }
       });
@@ -154,6 +201,10 @@ Template.index.onRendered(function() {
   GoogleMaps.load();
   let parentTemplate = this.parentTemplate();
   configureSliders(Meteor.user(), parentTemplate);
+
+  $('#updateExistingProperty').click(function() {
+    console.log('halp');
+  })
 });
 
 Template.index.helpers({
@@ -167,9 +218,11 @@ Template.index.helpers({
   }
 });
 
-Template.index.events({
-  //'click ': function() {}
-})
+// Template.index.events({
+//   'click #updateExistingProperty': function(e) {
+//     console.log('it got cliekd');
+//   }
+// })
 
 function configureSliders(user, parentTemplate) {
     // salary

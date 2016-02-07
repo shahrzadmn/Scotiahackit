@@ -25,5 +25,12 @@ Meteor.methods({
       }
     });
     return true;
+  },
+  'updateExistingProperty': function(existing, userId) {
+    return Meteor.users.update(userId, {
+      $set: {
+        "profile.existingProperty": existing
+      }
+    });
   }
 });
