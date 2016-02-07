@@ -75,7 +75,8 @@ Accounts.onCreateUser(function(options, user) {
   options.profile.basicSettings = {
     salary: 55000,
     savings: 9000,
-    debt: 2000
+    debt: 2000,
+    monthlyFreeCashFlow: 3523
   }
 
   options.profile.expenses = {

@@ -1,0 +1,16 @@
+#login {
+  width: 100%;
+  background-color: #1b1c1d !important;
+  color: white;
+  margin: 0;
+  height: 100vh;
+  padding: 6em;
+  #login--wrapper {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    h2 {
+      color: white;
+    }
+  }
+}

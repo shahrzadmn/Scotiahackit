@@ -185,7 +185,7 @@ Template.index.onCreated(function() {
 
               marker.addListener('click', function() {
                 let savings = Meteor.user().profile.basicSettings.savings;
-                let monthlyFreeCashFlow = Meteor.user().profile.basicSettings.monthlyMortgagePaymentCap;
+                let monthlyFreeCashFlow = Meteor.user().profile.basicSettings.monthlyFreeCashFlow;
 
 
               // if (savings < downPayment) {
@@ -209,7 +209,7 @@ Template.index.onCreated(function() {
                       <div class="home--details">Your monthly free cash flow: <span>${accounting.formatMoney(monthlyFreeCashFlow)}</span></div>
                       <br>
                       <br>
-                      <div style="display: block; width: 50%; margin: 0 auto;" class="ui red button">Apply for a Mortgage</div>
+                      <a href="http://www.scotiabank.com/ca/en/0,,25,00.html" style="display: block; width: 50%; margin: 0 auto;" class="ui red button">Apply for a Mortgage</a>
                     </div>
                   </div>
                 </div>`);
