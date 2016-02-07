@@ -1,4 +1,6 @@
 # Hackit =)
+Demo:
+http://meteorhackit.mybluemix.net/login
 
 - Steps:
   - Create fake data consistenting of "homes"
