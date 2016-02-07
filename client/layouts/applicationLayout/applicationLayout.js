@@ -41,6 +41,9 @@ Template.applicationLayout.onRendered(function() {
 });
 
 Template.applicationLayout.events({
+  'click #addExistingProperty': (event) => {
+    $('#existingPropertyModal').modal('show');
+  },
   'click #menu--button': (event) => {
     $('.ui.sidebar').sidebar('toggle');
   },
@@ -87,9 +90,6 @@ Template.applicationLayout.events({
         toastr["success"]("Saved your advanced settings!")
       }
     })
-  },
-  'click #addExistingPropertyButton': (event) => {
-    $('#existingPropertyModal').modal('show');
   }
 })
 

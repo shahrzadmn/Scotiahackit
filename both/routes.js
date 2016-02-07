@@ -5,6 +5,13 @@ Router.route('/', {
   loadingTemplate: "loading"
 });
 
+Router.route('/advisor', {
+  template: "advisor",
+  name: "advisor",
+  layoutTemplate: "applicationLayout",
+  loadingTemplate: "loading"
+});
+
 Router.route('/login', {
   template: "login",
   layoutTemplate: "defaultLayout",
@@ -19,13 +26,13 @@ Router.onBeforeAction(function() {
     Router.go('/');
   }
   this.next();
-});
+}, { only: ['login'] })
 
 Router.onBeforeAction(function() {
   if (Meteor.user()) {
     Router.go('/')
   } else {
-    console.log('wtf is this hsit');
+    //
   }
   this.next();
-})
+}, { only: ['login'] })

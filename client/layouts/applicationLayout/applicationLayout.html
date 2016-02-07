@@ -1,8 +1,8 @@
 <template name="applicationLayout">
   <div class="ui sidebar inverted vertical menu visible">
-    <div class="brand item">
+    <a class="brand item">
       <h1>Scotiabank Hackit</h1>  
-    </div>
+    </a>
     <div class="item">
       <img class="ui small circular image" 
         src="{{currentUser.profile.picture}}">
@@ -12,9 +12,20 @@
       <i role="logout" class="remove icon"></i>
     </div>
     <div class="item">
-      <div id="addExistingPropertyButton" class="ui yellow inverted button">Add Existing Property & Financials</div>
+      <a href="{{pathFor route='advisor'}}" id="advisor" class="ui orange inverted button">
+        Expenses Management
+      </a>
     </div>
     <div class="item">
+      <a href="/" class="ui yellow inverted button">
+        Properties & Mortgages
+      </a>
+      <br>
+      <div id="addExistingProperty" class="ui green inverted small button">
+        Add Home
+      </div>
+    </div>
+    {{!-- <div class="item">
       <div class="ui accordion">
         <div class="title">
           <i class="white dropdown icon"></i>
@@ -85,7 +96,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
     {{!-- <div class="item">
       <div class="ui accordion">
         <div class="title">
@@ -160,7 +171,7 @@
   </div>
   <div id="existingPropertyModal" class="ui small modal">
     <div class="header">
-      <i class="yellow huge home icon"></i>
+      <i class="green huge home icon"></i>
       Add Existing Property & Financials
     </div>
     <div class="home--description">
@@ -221,7 +232,7 @@
           </div>
         </div>
         <div class="field">
-          <button type="submit" id="submitExistingProperty" class="ui huge yellow labeled icon button">
+          <button type="submit" id="submitExistingProperty" class="ui huge green labeled icon button">
             <i class="check icon"></i>
             Submit
           </button>

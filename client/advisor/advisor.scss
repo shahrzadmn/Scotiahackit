@@ -1,0 +1,19 @@
+.pusher {
+  //background: url('giftly.png') !important;
+  background-color: #eee !important;
+}
+
+#advisor--list {
+  .title {
+    font-size: 1.2em;
+    &:hover {
+      //color: blue;
+    }
+  }
+  .content {
+    padding: 0.8em;
+    input[type="number"] {
+      //margin: 0 2em;
+    }
+  }
+}
