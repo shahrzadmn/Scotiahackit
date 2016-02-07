@@ -17,6 +17,21 @@ Template.applicationLayout.onRendered(function() {
       if (!err) {
         $('#existingPropertyModal').modal('hide');
         toastr["success"]("Saved your existing property!");
+
+        GoogleMaps.ready('map', function(map) {
+          let geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ "address": existing.address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              let latitude = results[0].geometry.location.lat();
+              let longitude = results[0].geometry.location.lng();
+              let marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: GoogleMaps.maps.map.instance,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+              });
+            }
+          });
+        });
       }
     })
   });
